@@ -1,3 +1,3 @@
-module GoAssetCommonGo
+module assetcommongo
 
 go 1.22.7

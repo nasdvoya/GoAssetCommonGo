@@ -1,2 +1,2 @@
-# GoAssetCommonGo
+# assetcommongo
 Asset common library Go.

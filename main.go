@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GoAssetCommonGo/assetcommon"
+	"assetcommongo/asset"
 	"encoding/json"
 	"fmt"
 )
@@ -33,7 +33,7 @@ func main() {
 		]
 	}`
 
-	var asset assetcommon.AssetBase
+	var asset asset.AssetBase
 	err := json.Unmarshal([]byte(data), &asset)
 
 	if err != nil {
