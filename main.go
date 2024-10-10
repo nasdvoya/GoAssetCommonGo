@@ -2,25 +2,44 @@ package main
 
 import (
 	"GoAssetCommonGo/assetcommon"
+	"encoding/json"
 	"fmt"
 )
 
-type ExampleTag struct {
-	Name string
-}
-
-func (t ExampleTag) GetName() string {
-	return t.Name
-}
-
 func main() {
-	asset := assetcommon.NewAssetBaseWithTags[ExampleTag]("mqtt://example.com")
+	data := `{
+		"mqttParameters": {
+			"address": "192.168.1.100",
+			"port": "1883",
+			"isAnonymous": false,
+			"username": "user123",
+			"password": "pass123"
+		},
+		"tags": [
+			{
+				"name": "Temperature",
+				"route": 0,
+				"publish": 1,
+				"mqttTopics": "sensors/temp",
+				"mqttRetain": true
+			},
+			{
+				"name": "Humidity",
+				"route": 1,
+				"publish": 2,
+				"mqttTopics": "sensors/humidity",
+				"mqttRetain": false
+			}
+		]
+	}`
 
-	asset.Tags = append(asset.Tags, ExampleTag{Name: "Tag1"})
-	asset.Tags = append(asset.Tags, ExampleTag{Name: "Tag2"})
+	var asset assetcommon.AssetBase
+	err := json.Unmarshal([]byte(data), &asset)
 
-	fmt.Println("MqttParameters:", asset.AssetBase.MqttParameters)
-	for _, tag := range asset.Tags {
-		fmt.Println("Tag:", tag.GetName())
+	if err != nil {
+		fmt.Print("Error deserializing JSON: ", err)
 	}
+
+	fmt.Printf("Deserialized Asset with Tags: %+v\n", data)
+
 }
