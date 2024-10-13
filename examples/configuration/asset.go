@@ -17,10 +17,6 @@ type ExampleAsset struct {
 	Tags []Tag `json:"tags"`
 }
 
-func (e ExampleAsset) AssetHelp() {
-	fmt.Println("Example Asset Help")
-}
-
 func DeserializeExampleConfig(data string) ExampleAsset {
 	var assetData ExampleAsset
 

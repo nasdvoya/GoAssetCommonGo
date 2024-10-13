@@ -1,8 +1,7 @@
 package main
 
 import (
-	"assetcommongo/examples/configuration"      // Import example configuration
-	sdkConfig "assetcommongo/sdk/configuration" // Import the SDK configuration package
+	"assetcommongo/examples/configuration" // Import example configuration
 )
 
 func main() {
@@ -11,5 +10,5 @@ func main() {
 	asset := configuration.DeserializeExampleConfig(data)
 
 	// Call the Commands function from SDK and pass ExampleAsset
-	sdkConfig.Commands(asset)
+	asset.Commands("--run")
 }

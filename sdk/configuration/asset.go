@@ -7,7 +7,6 @@ import (
 
 type Asset interface {
 	Commands(command string)
-	AssetHelp()
 }
 
 type AssetBase struct {
@@ -46,7 +45,7 @@ const (
 	ToOther
 )
 
-func Commands(a Asset) {
+func (a AssetBase) Commands(command string) {
 	helpFlag := flag.Bool("help", false, "Shows help information")
 	runFlag := flag.Bool("run", false, "Runs the asset")
 	defaultConfigFlag := flag.Bool("defaultConfig", false, "Shows default configuration")
@@ -66,4 +65,8 @@ func Commands(a Asset) {
 	if *schemaFlag {
 		fmt.Println("Schema generation not yet implemented.")
 	}
+}
+
+func (a AssetBase) AssetHelp() {
+	fmt.Println("Default Asset Help")
 }
