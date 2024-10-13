@@ -21,10 +21,6 @@ func (e ExampleAsset) AssetHelp() {
 	fmt.Println("Example Asset Help")
 }
 
-func ShowHelp(asset configuration.Asset) {
-	asset.AssetHelp()
-}
-
 func DeserializeExampleConfig(data string) ExampleAsset {
 	var assetData ExampleAsset
 
@@ -33,14 +29,6 @@ func DeserializeExampleConfig(data string) ExampleAsset {
 		fmt.Print("Error deserializing AssetBase JSON: ", err)
 	}
 	return assetData
-}
-
-func (asset ExampleAsset) DefaultConfiguration() string {
-	jsonData, err := json.MarshalIndent(asset, "", "  ")
-	if err != nil {
-		return "Error serializing default configuration"
-	}
-	return string(jsonData)
 }
 
 func ReturnExampleConfig() string {
