@@ -1,6 +1,10 @@
 package configuration
 
-import "assetcommongo/sdk/configuration"
+import (
+	"assetcommongo/sdk/configuration"
+	"encoding/json"
+	"fmt"
+)
 
 type Tag struct {
 	configuration.TagBase
@@ -44,4 +48,21 @@ func ReturnExampleConfig() string {
 		]
 	}`
 	return data
+}
+
+func DeserializeExampleConfig(data string) {
+
+	var assetData AssetBase
+	err := json.Unmarshal([]byte(data), &assetData)
+	if err != nil {
+		fmt.Print("Error deserializing AssetBase JSON: ", err)
+		return
+	}
+
+	indentedJson, err := json.MarshalIndent(assetData, "", " ")
+	if err != nil {
+		fmt.Print("Eror generating indented JSON: ", err)
+		return
+	}
+	fmt.Println(string(indentedJson))
 }
