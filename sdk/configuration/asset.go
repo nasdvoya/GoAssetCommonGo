@@ -1,4 +1,4 @@
-package asset
+package configuration
 
 type MqttParameters struct {
 	Address     string `json:"address"`
