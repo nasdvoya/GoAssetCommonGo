@@ -12,9 +12,35 @@ type Tag struct {
 	Bar string `json:"bar"`
 }
 
-type AssetBase struct {
-	MqttParameters configuration.MqttParameters `json:"MqttParameters"`
-	Tags           []Tag                        `json:"Tags"`
+type ExampleAsset struct {
+	configuration.AssetBase
+	Tags []Tag `json:"tags"`
+}
+
+func (e ExampleAsset) AssetHelp() {
+	fmt.Println("Example Asset Help")
+}
+
+func ShowHelp(asset configuration.Asset) {
+	asset.AssetHelp()
+}
+
+func DeserializeExampleConfig(data string) ExampleAsset {
+	var assetData ExampleAsset
+
+	err := json.Unmarshal([]byte(data), &assetData)
+	if err != nil {
+		fmt.Print("Error deserializing AssetBase JSON: ", err)
+	}
+	return assetData
+}
+
+func (asset ExampleAsset) DefaultConfiguration() string {
+	jsonData, err := json.MarshalIndent(asset, "", "  ")
+	if err != nil {
+		return "Error serializing default configuration"
+	}
+	return string(jsonData)
 }
 
 func ReturnExampleConfig() string {
@@ -48,21 +74,4 @@ func ReturnExampleConfig() string {
 		]
 	}`
 	return data
-}
-
-func DeserializeExampleConfig(data string) {
-
-	var assetData AssetBase
-	err := json.Unmarshal([]byte(data), &assetData)
-	if err != nil {
-		fmt.Print("Error deserializing AssetBase JSON: ", err)
-		return
-	}
-
-	indentedJson, err := json.MarshalIndent(assetData, "", " ")
-	if err != nil {
-		fmt.Print("Eror generating indented JSON: ", err)
-		return
-	}
-	fmt.Println(string(indentedJson))
 }

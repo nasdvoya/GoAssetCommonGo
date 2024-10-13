@@ -35,3 +35,8 @@ type AssetBase struct {
 	MqttParameters MqttParameters `json:"mqttParameters"`
 	Tags           *[]interface{} `json:"tags"`
 }
+
+type Asset interface {
+	AssetHelp()
+	DefaultConfiguration() string
+}
