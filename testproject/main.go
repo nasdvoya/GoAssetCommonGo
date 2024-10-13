@@ -21,14 +21,18 @@ func main() {
 				"route": 0,
 				"publish": 1,
 				"mqttTopics": "sensors/temp",
-				"mqttRetain": true
+				"mqttRetain": true,
+				"foo": 42,
+				"bar": "somevalue"
 			},
 			{
 				"name": "Humidity",
 				"route": 1,
 				"publish": 2,
 				"mqttTopics": "sensors/humidity",
-				"mqttRetain": false
+				"mqttRetain": false,
+				"foo": 43,
+				"bar": "othervalue"
 			}
 		]
 	}`

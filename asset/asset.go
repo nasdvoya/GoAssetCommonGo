@@ -8,7 +8,7 @@ type MqttParameters struct {
 	Password    string `json:"password"`
 }
 
-type Tag struct {
+type TagBase struct {
 	Name       string      `json:"name"`
 	Route      RouteType   `json:"route"`
 	Publish    PublishType `json:"publish"`
@@ -33,5 +33,5 @@ const (
 
 type AssetBase struct {
 	MqttParameters MqttParameters `json:"mqttParameters"`
-	Tags           *[]Tag         `json:"tags"`
+	Tags           *[]interface{} `json:"tags"`
 }
